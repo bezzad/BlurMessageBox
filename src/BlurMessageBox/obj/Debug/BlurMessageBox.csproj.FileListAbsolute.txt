@@ -1,0 +1,4 @@
+D:\BlurMessageBox\BlurMessageBox\bin\Debug\BlurMessageBox.dll
+D:\BlurMessageBox\BlurMessageBox\bin\Debug\BlurMessageBox.pdb
+D:\BlurMessageBox\BlurMessageBox\obj\Debug\BlurMessageBox.dll
+D:\BlurMessageBox\BlurMessageBox\obj\Debug\BlurMessageBox.pdb

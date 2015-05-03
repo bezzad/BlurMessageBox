@@ -1,0 +1,10 @@
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.csprojResolveAssemblyReference.cache
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.Form1.resources
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.Properties.Resources.resources
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
+D:\BlurMessageBox\TestWinForms\bin\Debug\TestWinForms.exe
+D:\BlurMessageBox\TestWinForms\bin\Debug\TestWinForms.pdb
+D:\BlurMessageBox\TestWinForms\bin\Debug\BlurMessageBox.dll
+D:\BlurMessageBox\TestWinForms\bin\Debug\BlurMessageBox.pdb
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.exe
+D:\BlurMessageBox\TestWinForms\obj\Debug\TestWinForms.pdb
