@@ -12,3 +12,5 @@ D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.csproj.GenerateResource.Cache
 D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.exe
 D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.pdb
 D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.csprojResolveAssemblyReference.cache
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.exe
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.pdb
