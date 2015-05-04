@@ -14,3 +14,15 @@ D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.pdb
 D:\BlurMessageBox\TestWPF\obj\Debug\TestWPF.csprojResolveAssemblyReference.cache
 D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.exe
 D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.pdb
+D:\BlurMessageBox\src\TestWPF\bin\Debug\TestWPF.exe
+D:\BlurMessageBox\src\TestWPF\bin\Debug\TestWPF.pdb
+D:\BlurMessageBox\src\TestWPF\bin\Debug\BlurMessageBox.dll
+D:\BlurMessageBox\src\TestWPF\bin\Debug\BlurMessageBox.pdb
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.csprojResolveAssemblyReference.cache
+D:\BlurMessageBox\src\TestWPF\obj\Debug\MainWindow.baml
+D:\BlurMessageBox\src\TestWPF\obj\Debug\MainWindow.g.cs
+D:\BlurMessageBox\src\TestWPF\obj\Debug\App.g.cs
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF_MarkupCompile.cache
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.g.resources
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.Properties.Resources.resources
+D:\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.csproj.GenerateResource.Cache

@@ -10,11 +10,13 @@ namespace BlurMessageBox
 {
     public class MsgBox : Form
     {
+        #region Properties
+        
         private const int CS_DROPSHADOW = 0x00020000;
         private static MsgBox _msgBox;
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
-        private static Point lastMousePos;
+        private static Point _lastMousePos;
 
         private Panel _plHeader = new Panel();
         private Panel _plFooter = new Panel();
@@ -28,6 +30,10 @@ namespace BlurMessageBox
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool MessageBeep(uint type);
 
+        #endregion
+
+        #region Constructors
+        
         private MsgBox()
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -91,22 +97,7 @@ namespace BlurMessageBox
             this.Controls.Add(_plFooter);
         }
 
-        private static void MsgBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                lastMousePos = new Point(e.X, e.Y);
-            }
-        }
-
-        private static void MsgBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                _msgBox.Left += e.X - lastMousePos.X;
-                _msgBox.Top += e.Y - lastMousePos.Y;
-            }
-        }
+        #endregion
 
         #region Normal MessageBox.Show Methods
         public static DialogResult Show(string message)
@@ -345,225 +336,23 @@ namespace BlurMessageBox
         }
         #endregion
 
-        static void timer_Tick(object sender, EventArgs e)
+        #region Static Methods
+
+        private static void MsgBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Timer timer = (Timer)sender;
-            AnimateMsgBox animate = (AnimateMsgBox)timer.Tag;
-
-            switch (animate.Style)
+            if (e.Button == MouseButtons.Left)
             {
-                case AnimateStyle.SlideDown:
-                    if (_msgBox.Height < animate.FormSize.Height)
-                    {
-                        _msgBox.Height += 17;
-                        _msgBox.Invalidate();
-                    }
-                    else
-                    {
-                        _timer.Stop();
-                        _timer.Dispose();
-                    }
-                    break;
-
-                case AnimateStyle.FadeIn:
-                    if (_msgBox.Opacity < 1)
-                    {
-                        _msgBox.Opacity += 0.1;
-                        _msgBox.Invalidate();
-                    }
-                    else
-                    {
-                        _timer.Stop();
-                        _timer.Dispose();
-                    }
-                    break;
-
-                case AnimateStyle.ZoomIn:
-                    if (_msgBox.Width > animate.FormSize.Width)
-                    {
-                        _msgBox.Width -= 17;
-                        _msgBox.Invalidate();
-                    }
-                    if (_msgBox.Height > animate.FormSize.Height)
-                    {
-                        _msgBox.Height -= 17;
-                        _msgBox.Invalidate();
-                    }
-                    if (_msgBox.Width <= animate.FormSize.Width && _msgBox.Height <= animate.FormSize.Height)
-                    {
-                        _timer.Stop();
-                        _timer.Dispose();
-                    }
-                    break;
+                _lastMousePos = new Point(e.X, e.Y);
             }
         }
 
-        private static void InitButtons(Buttons buttons)
+        private static void MsgBox_MouseMove(object sender, MouseEventArgs e)
         {
-            switch (buttons)
+            if (e.Button == MouseButtons.Left)
             {
-                case Buttons.AbortRetryIgnore:
-                    _msgBox.InitAbortRetryIgnoreButtons();
-                    break;
-
-                case Buttons.OK:
-                    _msgBox.InitOKButton();
-                    break;
-
-                case Buttons.OKCancel:
-                    _msgBox.InitOKCancelButtons();
-                    break;
-
-                case Buttons.RetryCancel:
-                    _msgBox.InitRetryCancelButtons();
-                    break;
-
-                case Buttons.YesNo:
-                    _msgBox.InitYesNoButtons();
-                    break;
-
-                case Buttons.YesNoCancel:
-                    _msgBox.InitYesNoCancelButtons();
-                    break;
+                _msgBox.Left += e.X - _lastMousePos.X;
+                _msgBox.Top += e.Y - _lastMousePos.Y;
             }
-
-            foreach (Button btn in _msgBox._buttonCollection)
-            {
-                btn.ForeColor = Color.FromArgb(170, 170, 170);
-                btn.Font = new System.Drawing.Font("Segoe UI", 8);
-                btn.Padding = new Padding(3);
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.Height = 30;
-                btn.FlatAppearance.BorderColor = Color.FromArgb(99, 99, 98);
-
-                _msgBox._flpButtons.Controls.Add(btn);
-            }
-        }
-
-        private static void InitIcon(Icons icon)
-        {
-            switch (icon)
-            {
-                case Icons.Application:
-                    _msgBox._picIcon.Image = SystemIcons.Application.ToBitmap();
-                    break;
-
-                case Icons.Exclamation:
-                    _msgBox._picIcon.Image = SystemIcons.Exclamation.ToBitmap();
-                    break;
-
-                case Icons.Error:
-                    _msgBox._picIcon.Image = SystemIcons.Error.ToBitmap();
-                    break;
-
-                case Icons.Info:
-                    _msgBox._picIcon.Image = SystemIcons.Information.ToBitmap();
-                    break;
-
-                case Icons.Question:
-                    _msgBox._picIcon.Image = SystemIcons.Question.ToBitmap();
-                    break;
-
-                case Icons.Shield:
-                    _msgBox._picIcon.Image = SystemIcons.Shield.ToBitmap();
-                    break;
-
-                case Icons.Warning:
-                    _msgBox._picIcon.Image = SystemIcons.Warning.ToBitmap();
-                    break;
-            }
-        }
-
-        private void InitAbortRetryIgnoreButtons()
-        {
-            Button btnAbort = new Button();
-            btnAbort.Text = "Abort";
-            btnAbort.Click += ButtonClick;
-
-            Button btnRetry = new Button();
-            btnRetry.Text = "Retry";
-            btnRetry.Click += ButtonClick;
-
-            Button btnIgnore = new Button();
-            btnIgnore.Text = "Ignore";
-            btnIgnore.Click += ButtonClick;
-
-            this._buttonCollection.Add(btnAbort);
-            this._buttonCollection.Add(btnRetry);
-            this._buttonCollection.Add(btnIgnore);
-        }
-
-        private void InitOKButton()
-        {
-            Button btnOK = new Button();
-            btnOK.Text = "OK";
-            btnOK.Click += ButtonClick;
-
-            this._buttonCollection.Add(btnOK);
-        }
-
-        private void InitOKCancelButtons()
-        {
-            Button btnOK = new Button();
-            btnOK.Text = "OK";
-            btnOK.Click += ButtonClick;
-
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnOK);
-            this._buttonCollection.Add(btnCancel);
-        }
-
-        private void InitRetryCancelButtons()
-        {
-            Button btnRetry = new Button();
-            btnRetry.Text = "OK";
-            btnRetry.Click += ButtonClick;
-
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnRetry);
-            this._buttonCollection.Add(btnCancel);
-        }
-
-        private void InitYesNoButtons()
-        {
-            Button btnYes = new Button();
-            btnYes.Text = "Yes";
-            btnYes.Click += ButtonClick;
-
-            Button btnNo = new Button();
-            btnNo.Text = "No";
-            btnNo.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnYes);
-            this._buttonCollection.Add(btnNo);
-        }
-
-        private void InitYesNoCancelButtons()
-        {
-            Button btnYes = new Button();
-            btnYes.Text = "Abort";
-            btnYes.Click += ButtonClick;
-
-            Button btnNo = new Button();
-            btnNo.Text = "Retry";
-            btnNo.Click += ButtonClick;
-
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-            this._buttonCollection.Add(btnYes);
-            this._buttonCollection.Add(btnNo);
-            this._buttonCollection.Add(btnCancel);
         }
 
         private static void ButtonClick(object sender, EventArgs e)
@@ -630,6 +419,232 @@ namespace BlurMessageBox
             }
             return new Size(width, height);
         }
+        
+        private static void timer_Tick(object sender, EventArgs e)
+        {
+            Timer timer = (Timer)sender;
+            AnimateMsgBox animate = (AnimateMsgBox)timer.Tag;
+
+            switch (animate.Style)
+            {
+                case AnimateStyle.SlideDown:
+                    if (_msgBox.Height < animate.FormSize.Height)
+                    {
+                        _msgBox.Height += 17;
+                        _msgBox.Invalidate();
+                    }
+                    else
+                    {
+                        _timer.Stop();
+                        _timer.Dispose();
+                    }
+                    break;
+
+                case AnimateStyle.FadeIn:
+                    if (_msgBox.Opacity < 1)
+                    {
+                        _msgBox.Opacity += 0.1;
+                        _msgBox.Invalidate();
+                    }
+                    else
+                    {
+                        _timer.Stop();
+                        _timer.Dispose();
+                    }
+                    break;
+
+                case AnimateStyle.ZoomIn:
+                    if (_msgBox.Width > animate.FormSize.Width)
+                    {
+                        _msgBox.Width -= 17;
+                        _msgBox.Invalidate();
+                    }
+                    if (_msgBox.Height > animate.FormSize.Height)
+                    {
+                        _msgBox.Height -= 17;
+                        _msgBox.Invalidate();
+                    }
+                    if (_msgBox.Width <= animate.FormSize.Width && _msgBox.Height <= animate.FormSize.Height)
+                    {
+                        _timer.Stop();
+                        _timer.Dispose();
+                    }
+                    break;
+            }
+        }
+
+        private static void InitButtons(Buttons buttons)
+        {
+            switch (buttons)
+            {
+                case Buttons.AbortRetryIgnore:
+                    _msgBox.InitAbortRetryIgnoreButtons();
+                    break;
+
+                case Buttons.OK:
+                    _msgBox.InitOkButton();
+                    break;
+
+                case Buttons.OKCancel:
+                    _msgBox.InitOkCancelButtons();
+                    break;
+
+                case Buttons.RetryCancel:
+                    _msgBox.InitRetryCancelButtons();
+                    break;
+
+                case Buttons.YesNo:
+                    _msgBox.InitYesNoButtons();
+                    break;
+
+                case Buttons.YesNoCancel:
+                    _msgBox.InitYesNoCancelButtons();
+                    break;
+            }
+
+            foreach (Button btn in _msgBox._buttonCollection)
+            {
+                btn.ForeColor = Color.FromArgb(170, 170, 170);
+                btn.Font = new System.Drawing.Font("Segoe UI", 8);
+                btn.Padding = new Padding(3);
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.Height = 30;
+                btn.FlatAppearance.BorderColor = Color.FromArgb(99, 99, 98);
+
+                _msgBox._flpButtons.Controls.Add(btn);
+            }
+        }
+
+        private static void InitIcon(Icons icon)
+        {
+            switch (icon)
+            {
+                case Icons.Application:
+                    _msgBox._picIcon.Image = SystemIcons.Application.ToBitmap();
+                    break;
+
+                case Icons.Exclamation:
+                    _msgBox._picIcon.Image = SystemIcons.Exclamation.ToBitmap();
+                    break;
+
+                case Icons.Error:
+                    _msgBox._picIcon.Image = SystemIcons.Error.ToBitmap();
+                    break;
+
+                case Icons.Info:
+                    _msgBox._picIcon.Image = SystemIcons.Information.ToBitmap();
+                    break;
+
+                case Icons.Question:
+                    _msgBox._picIcon.Image = SystemIcons.Question.ToBitmap();
+                    break;
+
+                case Icons.Shield:
+                    _msgBox._picIcon.Image = SystemIcons.Shield.ToBitmap();
+                    break;
+
+                case Icons.Warning:
+                    _msgBox._picIcon.Image = SystemIcons.Warning.ToBitmap();
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+        
+        private void InitAbortRetryIgnoreButtons()
+        {
+            Button btnAbort = new Button();
+            btnAbort.Text = "Abort";
+            btnAbort.Click += ButtonClick;
+
+            Button btnRetry = new Button();
+            btnRetry.Text = "Retry";
+            btnRetry.Click += ButtonClick;
+
+            Button btnIgnore = new Button();
+            btnIgnore.Text = "Ignore";
+            btnIgnore.Click += ButtonClick;
+
+            this._buttonCollection.Add(btnAbort);
+            this._buttonCollection.Add(btnRetry);
+            this._buttonCollection.Add(btnIgnore);
+        }
+
+        private void InitOkButton()
+        {
+            Button btnOK = new Button();
+            btnOK.Text = "OK";
+            btnOK.Click += ButtonClick;
+
+            this._buttonCollection.Add(btnOK);
+        }
+
+        private void InitOkCancelButtons()
+        {
+            Button btnOK = new Button();
+            btnOK.Text = "OK";
+            btnOK.Click += ButtonClick;
+
+            Button btnCancel = new Button();
+            btnCancel.Text = "Cancel";
+            btnCancel.Click += ButtonClick;
+
+
+            this._buttonCollection.Add(btnOK);
+            this._buttonCollection.Add(btnCancel);
+        }
+
+        private void InitRetryCancelButtons()
+        {
+            Button btnRetry = new Button();
+            btnRetry.Text = "OK";
+            btnRetry.Click += ButtonClick;
+
+            Button btnCancel = new Button();
+            btnCancel.Text = "Cancel";
+            btnCancel.Click += ButtonClick;
+
+
+            this._buttonCollection.Add(btnRetry);
+            this._buttonCollection.Add(btnCancel);
+        }
+
+        private void InitYesNoButtons()
+        {
+            Button btnYes = new Button();
+            btnYes.Text = "Yes";
+            btnYes.Click += ButtonClick;
+
+            Button btnNo = new Button();
+            btnNo.Text = "No";
+            btnNo.Click += ButtonClick;
+
+
+            this._buttonCollection.Add(btnYes);
+            this._buttonCollection.Add(btnNo);
+        }
+
+        private void InitYesNoCancelButtons()
+        {
+            Button btnYes = new Button();
+            btnYes.Text = "Abort";
+            btnYes.Click += ButtonClick;
+
+            Button btnNo = new Button();
+            btnNo.Text = "Retry";
+            btnNo.Click += ButtonClick;
+
+            Button btnCancel = new Button();
+            btnCancel.Text = "Cancel";
+            btnCancel.Click += ButtonClick;
+
+            this._buttonCollection.Add(btnYes);
+            this._buttonCollection.Add(btnNo);
+            this._buttonCollection.Add(btnCancel);
+        }
+
 
         protected override CreateParams CreateParams
         {
@@ -651,5 +666,7 @@ namespace BlurMessageBox
 
             g.DrawRectangle(pen, rect);
         }
+        
+        #endregion
     }
 }

@@ -20,9 +20,8 @@ namespace BlurMessageBox
             // Buffering ...
             effectBuffer = win.Effect;
             brushBuffer = win.OpacityMask;
-
+            
             // Change this.win effective objects
-
             win.Dispatcher.Invoke(new Action(delegate { win.Effect = objBlur; }), System.Windows.Threading.DispatcherPriority.Normal);
             win.Dispatcher.Invoke(new Action(delegate { win.OpacityMask = mask; }), System.Windows.Threading.DispatcherPriority.Normal);
         }
