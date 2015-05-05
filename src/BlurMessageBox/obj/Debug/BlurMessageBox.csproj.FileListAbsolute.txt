@@ -6,3 +6,8 @@ D:\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.dll
 D:\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.pdb
 D:\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.dll
 D:\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csprojResolveAssemblyReference.cache
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.pdb

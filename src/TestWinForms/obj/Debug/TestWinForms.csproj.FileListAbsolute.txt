@@ -18,3 +18,13 @@ D:\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Properties.Resources.r
 D:\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
 D:\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
 D:\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.exe
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csprojResolveAssemblyReference.cache
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Form1.resources
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Properties.Resources.resources
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb

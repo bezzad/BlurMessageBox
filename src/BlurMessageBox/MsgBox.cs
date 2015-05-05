@@ -359,7 +359,7 @@ namespace BlurMessageBox
         {
             Button btn = (Button)sender;
 
-            switch (btn.Text)
+            switch (btn.Name)
             {
                 case "Abort":
                     _buttonResult = DialogResult.Abort;
@@ -552,98 +552,115 @@ namespace BlurMessageBox
         #endregion
 
         #region Methods
-        
-        private void InitAbortRetryIgnoreButtons()
-        {
-            Button btnAbort = new Button();
-            btnAbort.Text = "Abort";
-            btnAbort.Click += ButtonClick;
 
+        private Button GetOkButton()
+        {
+            Button btnOk = new Button();
+            btnOk.Name = "OK";
+            btnOk.Text = "OK";
+            btnOk.Click += ButtonClick;
+
+            return btnOk;
+        }
+
+        private Button GetCancelButton()
+        {
+            Button btnCancel = new Button();
+            btnCancel.Name = "Cancel";
+            btnCancel.Text = "Cancel";
+            btnCancel.Click += ButtonClick;
+
+            return btnCancel;
+        }
+
+        private Button GetRetryButton()
+        {
             Button btnRetry = new Button();
+            btnRetry.Name = "Retry";
             btnRetry.Text = "Retry";
             btnRetry.Click += ButtonClick;
 
+            return btnRetry;
+        }
+
+        private Button GetAbortButton()
+        {
+            Button btnAbort = new Button();
+            btnAbort.Name = "Abort";
+            btnAbort.Text = "Abort";
+            btnAbort.Click += ButtonClick;
+
+            return btnAbort;
+        }
+
+        private Button GetIgnoreButton()
+        {
             Button btnIgnore = new Button();
-            btnIgnore.Text = "Ignore";
+            btnIgnore.Name = "Ignore";
+            btnIgnore.Text = "Abort";
             btnIgnore.Click += ButtonClick;
 
-            this._buttonCollection.Add(btnAbort);
-            this._buttonCollection.Add(btnRetry);
-            this._buttonCollection.Add(btnIgnore);
+            return btnIgnore;
         }
+
+        private Button GetYesButton()
+        {
+            Button btnYes = new Button();
+            btnYes.Name = "Yes";
+            btnYes.Text = "Yes";
+            btnYes.Click += ButtonClick;
+
+            return btnYes;
+        }
+
+        private Button GetNoButton()
+        {
+            Button btnNo = new Button();
+            btnNo.Name = "No";
+            btnNo.Text = "No";
+            btnNo.Click += ButtonClick;
+
+            return btnNo;
+        }
+
 
         private void InitOkButton()
         {
-            Button btnOK = new Button();
-            btnOK.Text = "OK";
-            btnOK.Click += ButtonClick;
-
-            this._buttonCollection.Add(btnOK);
+            _buttonCollection.Add(GetOkButton());
         }
 
         private void InitOkCancelButtons()
         {
-            Button btnOK = new Button();
-            btnOK.Text = "OK";
-            btnOK.Click += ButtonClick;
-
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnOK);
-            this._buttonCollection.Add(btnCancel);
+            this._buttonCollection.Add(GetOkButton());
+            this._buttonCollection.Add(GetCancelButton());
         }
 
         private void InitRetryCancelButtons()
         {
-            Button btnRetry = new Button();
-            btnRetry.Text = "OK";
-            btnRetry.Click += ButtonClick;
+            this._buttonCollection.Add(GetRetryButton());
+            this._buttonCollection.Add(GetCancelButton());
+        }
 
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnRetry);
-            this._buttonCollection.Add(btnCancel);
+        private void InitAbortRetryIgnoreButtons()
+        {
+            this._buttonCollection.Add(GetAbortButton());
+            this._buttonCollection.Add(GetRetryButton());
+            this._buttonCollection.Add(GetIgnoreButton());
         }
 
         private void InitYesNoButtons()
         {
-            Button btnYes = new Button();
-            btnYes.Text = "Yes";
-            btnYes.Click += ButtonClick;
-
-            Button btnNo = new Button();
-            btnNo.Text = "No";
-            btnNo.Click += ButtonClick;
-
-
-            this._buttonCollection.Add(btnYes);
-            this._buttonCollection.Add(btnNo);
+            this._buttonCollection.Add(GetYesButton());
+            this._buttonCollection.Add(GetNoButton());
         }
 
         private void InitYesNoCancelButtons()
         {
-            Button btnYes = new Button();
-            btnYes.Text = "Abort";
-            btnYes.Click += ButtonClick;
-
-            Button btnNo = new Button();
-            btnNo.Text = "Retry";
-            btnNo.Click += ButtonClick;
-
-            Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
-            btnCancel.Click += ButtonClick;
-
-            this._buttonCollection.Add(btnYes);
-            this._buttonCollection.Add(btnNo);
-            this._buttonCollection.Add(btnCancel);
+            this._buttonCollection.Add(GetYesButton());
+            this._buttonCollection.Add(GetNoButton());
+            this._buttonCollection.Add(GetCancelButton());
         }
+
 
 
         protected override CreateParams CreateParams
