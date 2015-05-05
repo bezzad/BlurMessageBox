@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,16 @@ using System.Runtime.InteropServices;
 
 namespace BlurMessageBox
 {
-    public class MsgBox : Form
+    public sealed class MsgBox : Form
     {
         #region Properties
-        
+
         private const int CS_DROPSHADOW = 0x00020000;
         private static MsgBox _msgBox;
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
         private static Point _lastMousePos;
-
+        
         private Panel _plHeader = new Panel();
         private Panel _plFooter = new Panel();
         private Panel _plIcon = new Panel();
@@ -33,7 +34,7 @@ namespace BlurMessageBox
         #endregion
 
         #region Constructors
-        
+
         private MsgBox()
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -419,7 +420,7 @@ namespace BlurMessageBox
             }
             return new Size(width, height);
         }
-        
+
         private static void timer_Tick(object sender, EventArgs e)
         {
             Timer timer = (Timer)sender;
@@ -557,7 +558,7 @@ namespace BlurMessageBox
         {
             Button btnOk = new Button();
             btnOk.Name = "OK";
-            btnOk.Text = "OK";
+            btnOk.Text = Resources.GetString("BtnOK");
             btnOk.Click += ButtonClick;
 
             return btnOk;
@@ -567,7 +568,7 @@ namespace BlurMessageBox
         {
             Button btnCancel = new Button();
             btnCancel.Name = "Cancel";
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = Resources.GetString("BtnCancel");
             btnCancel.Click += ButtonClick;
 
             return btnCancel;
@@ -577,7 +578,7 @@ namespace BlurMessageBox
         {
             Button btnRetry = new Button();
             btnRetry.Name = "Retry";
-            btnRetry.Text = "Retry";
+            btnRetry.Text = Resources.GetString("BtnRetry");
             btnRetry.Click += ButtonClick;
 
             return btnRetry;
@@ -587,7 +588,7 @@ namespace BlurMessageBox
         {
             Button btnAbort = new Button();
             btnAbort.Name = "Abort";
-            btnAbort.Text = "Abort";
+            btnAbort.Text = Resources.GetString("BtnAbort"); ;
             btnAbort.Click += ButtonClick;
 
             return btnAbort;
@@ -597,7 +598,7 @@ namespace BlurMessageBox
         {
             Button btnIgnore = new Button();
             btnIgnore.Name = "Ignore";
-            btnIgnore.Text = "Abort";
+            btnIgnore.Text = Resources.GetString("BtnIgnore");
             btnIgnore.Click += ButtonClick;
 
             return btnIgnore;
@@ -607,7 +608,7 @@ namespace BlurMessageBox
         {
             Button btnYes = new Button();
             btnYes.Name = "Yes";
-            btnYes.Text = "Yes";
+            btnYes.Text = Resources.GetString("BtnYes"); ;
             btnYes.Click += ButtonClick;
 
             return btnYes;
@@ -617,7 +618,7 @@ namespace BlurMessageBox
         {
             Button btnNo = new Button();
             btnNo.Name = "No";
-            btnNo.Text = "No";
+            btnNo.Text = Resources.GetString("BtnNo"); ;
             btnNo.Click += ButtonClick;
 
             return btnNo;
@@ -683,7 +684,7 @@ namespace BlurMessageBox
 
             g.DrawRectangle(pen, rect);
         }
-        
+
         #endregion
     }
 }

@@ -40,3 +40,5 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\obj\Debug\
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.csproj.GenerateResource.Cache
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.exe
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\en-US\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\fa-IR\BlurMessageBox.resources.dll

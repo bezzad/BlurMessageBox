@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -46,6 +47,21 @@ namespace TestWPF
         {
             this.MessageBoxShow("This is a test messageBox",
                 "Test", Buttons.YesNoCancel, Icons.Warning, AnimateStyle.FadeIn);
+        }
+
+        private void RbtnLanguage_Checked(object sender, RoutedEventArgs e)
+        {
+            var lang = ((RadioButton)sender).Content as string;
+
+            switch (lang)
+            {
+                case "Persian":
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fa-IR");
+                    break;
+                case "English":
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                    break;
+            }
         }
     }
 }

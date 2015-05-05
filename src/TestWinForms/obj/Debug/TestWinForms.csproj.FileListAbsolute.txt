@@ -28,3 +28,5 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\D
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\en-US\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\fa-IR\BlurMessageBox.resources.dll
