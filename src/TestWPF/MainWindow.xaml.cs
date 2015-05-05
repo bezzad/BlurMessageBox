@@ -56,10 +56,16 @@ namespace TestWPF
             switch (lang)
             {
                 case "Persian":
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fa-IR");
+                    {
+                        System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("fa-IR");
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fa-IR");
+                    }
                     break;
                 case "English":
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                    {
+                        System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                    }
                     break;
             }
         }
