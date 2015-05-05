@@ -17,3 +17,4 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\en-US\BlurMessageBox.resources.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Resource.Lang.fa-IR.resources
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Resource.Lang.en-US.resources
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csprojResolveAssemblyReference.cache

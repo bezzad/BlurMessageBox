@@ -18,7 +18,7 @@ namespace BlurMessageBox
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
         private static Point _lastMousePos;
-        
+
         private Panel _plHeader = new Panel();
         private Panel _plFooter = new Panel();
         private Panel _plIcon = new Panel();
@@ -48,11 +48,13 @@ namespace BlurMessageBox
             _lblTitle.Font = new System.Drawing.Font("Segoe UI", 18);
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
+            _lblTitle.RightToLeft = Resources.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
             _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
             _lblMessage.Dock = DockStyle.Fill;
+            _lblMessage.RightToLeft = Resources.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _flpButtons.FlowDirection = FlowDirection.RightToLeft;
             _flpButtons.Dock = DockStyle.Fill;
