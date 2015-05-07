@@ -11,10 +11,8 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\bin
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.pdb
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\bin\Debug\fa-IR\BlurMessageBox.resources.dll
-D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\bin\Debug\en-US\BlurMessageBox.resources.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csproj.GenerateResource.Cache
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\fa-IR\BlurMessageBox.resources.dll
-D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\en-US\BlurMessageBox.resources.dll
-D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Resource.Lang.fa-IR.resources
-D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Resource.Lang.en-US.resources
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csprojResolveAssemblyReference.cache
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.fa-IR.resources
+D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.resources

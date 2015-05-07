@@ -52,7 +52,7 @@ namespace TestWPF
         private void RbtnLanguage_Checked(object sender, RoutedEventArgs e)
         {
             var lang = ((RadioButton)sender).Content as string;
-
+            var s = CultureInfo.CurrentCulture.TextInfo.CultureName;
             switch (lang)
             {
                 case "Persian":

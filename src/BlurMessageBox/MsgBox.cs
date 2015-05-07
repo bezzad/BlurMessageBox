@@ -48,13 +48,13 @@ namespace BlurMessageBox
             _lblTitle.Font = new System.Drawing.Font("Segoe UI", 18);
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
-            _lblTitle.RightToLeft = Resources.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblTitle.RightToLeft = Properties.Localization.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
             _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
             _lblMessage.Dock = DockStyle.Fill;
-            _lblMessage.RightToLeft = Resources.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblMessage.RightToLeft = Properties.Localization.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _flpButtons.FlowDirection = FlowDirection.RightToLeft;
             _flpButtons.Dock = DockStyle.Fill;
@@ -560,7 +560,7 @@ namespace BlurMessageBox
         {
             Button btnOk = new Button();
             btnOk.Name = "OK";
-            btnOk.Text = Resources.GetString("BtnOK");
+            btnOk.Text = Properties.Localization.BtnOK;
             btnOk.Click += ButtonClick;
 
             return btnOk;
@@ -570,7 +570,7 @@ namespace BlurMessageBox
         {
             Button btnCancel = new Button();
             btnCancel.Name = "Cancel";
-            btnCancel.Text = Resources.GetString("BtnCancel");
+            btnCancel.Text = Properties.Localization.BtnCancel;
             btnCancel.Click += ButtonClick;
 
             return btnCancel;
@@ -580,7 +580,7 @@ namespace BlurMessageBox
         {
             Button btnRetry = new Button();
             btnRetry.Name = "Retry";
-            btnRetry.Text = Resources.GetString("BtnRetry");
+            btnRetry.Text = Properties.Localization.BtnRetry;
             btnRetry.Click += ButtonClick;
 
             return btnRetry;
@@ -590,7 +590,7 @@ namespace BlurMessageBox
         {
             Button btnAbort = new Button();
             btnAbort.Name = "Abort";
-            btnAbort.Text = Resources.GetString("BtnAbort"); ;
+            btnAbort.Text = Properties.Localization.BtnAbort;
             btnAbort.Click += ButtonClick;
 
             return btnAbort;
@@ -600,7 +600,7 @@ namespace BlurMessageBox
         {
             Button btnIgnore = new Button();
             btnIgnore.Name = "Ignore";
-            btnIgnore.Text = Resources.GetString("BtnIgnore");
+            btnIgnore.Text = Properties.Localization.BtnIgnore;
             btnIgnore.Click += ButtonClick;
 
             return btnIgnore;
@@ -610,7 +610,7 @@ namespace BlurMessageBox
         {
             Button btnYes = new Button();
             btnYes.Name = "Yes";
-            btnYes.Text = Resources.GetString("BtnYes"); ;
+            btnYes.Text = Properties.Localization.BtnYes;
             btnYes.Click += ButtonClick;
 
             return btnYes;
@@ -620,7 +620,7 @@ namespace BlurMessageBox
         {
             Button btnNo = new Button();
             btnNo.Name = "No";
-            btnNo.Text = Resources.GetString("BtnNo"); ;
+            btnNo.Text = Properties.Localization.BtnNo;
             btnNo.Click += ButtonClick;
 
             return btnNo;
