@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BlurMessageBox;
 
 namespace TestWPF
@@ -52,17 +42,42 @@ namespace TestWPF
         private void RbtnLanguage_Checked(object sender, RoutedEventArgs e)
         {
             var lang = ((RadioButton)sender).Content as string;
-            var s = CultureInfo.CurrentCulture.TextInfo.CultureName;
+
             switch (lang)
             {
                 case "Persian":
                     {
-                        System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fa-IR");
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fa-IR");
                     }
                     break;
                 case "English":
                     {
-                        System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+                    }
+                    break;
+                case "Russian":
+                    {
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ru-RU");
+                    }
+                    break;
+                case "Azerbaijan":
+                    {
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("az");
+                    }
+                    break;
+                case "French":
+                    {
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-FR");
+                    }
+                    break;
+                case "Turkish":
+                    {
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("tr-TR");
+                    }
+                    break;
+                case "Arabic":
+                    {
+                        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ar");
                     }
                     break;
             }

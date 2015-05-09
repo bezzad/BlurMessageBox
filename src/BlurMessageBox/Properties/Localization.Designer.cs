@@ -8,13 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Globalization;
-
-namespace BlurMessageBox.Properties
-{
+namespace BlurMessageBox.Properties {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -25,125 +22,103 @@ namespace BlurMessageBox.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Localization
-    {
-
+    internal class Localization {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Localization()
-        {
+        internal Localization() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BlurMessageBox.Properties.Localization", typeof(Localization).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
-                return resourceCulture ?? CultureInfo.CurrentUICulture;
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Abort.
         /// </summary>
-        internal static string BtnAbort
-        {
-            get
-            {
+        internal static string BtnAbort {
+            get {
                 return ResourceManager.GetString("BtnAbort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string BtnCancel
-        {
-            get
-            {
+        internal static string BtnCancel {
+            get {
                 return ResourceManager.GetString("BtnCancel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ignore.
         /// </summary>
-        internal static string BtnIgnore
-        {
-            get
-            {
+        internal static string BtnIgnore {
+            get {
                 return ResourceManager.GetString("BtnIgnore", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string BtnNo
-        {
-            get
-            {
+        internal static string BtnNo {
+            get {
                 return ResourceManager.GetString("BtnNo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        internal static string BtnOK
-        {
-            get
-            {
+        internal static string BtnOK {
+            get {
                 return ResourceManager.GetString("BtnOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
-        internal static string BtnRetry
-        {
-            get
-            {
+        internal static string BtnRetry {
+            get {
                 return ResourceManager.GetString("BtnRetry", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string BtnYes
-        {
-            get
-            {
+        internal static string BtnYes {
+            get {
                 return ResourceManager.GetString("BtnYes", resourceCulture);
             }
         }

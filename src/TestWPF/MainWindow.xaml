@@ -8,5 +8,10 @@
         <Button x:Name="BtTestMsg" Content="Show Test Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="195" Margin="237,185,0,0" Height="46" Click="BtTestMsg_Click"/>
         <RadioButton x:Name="RbtnPersian" Content="Persian" HorizontalAlignment="Left" Height="20" Margin="27,75,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
         <RadioButton x:Name="RbtnEnglish" Content="English" HorizontalAlignment="Left" Height="20" Margin="27,50,0,0" VerticalAlignment="Top" Width="92" IsChecked="True" Checked="RbtnLanguage_Checked"/>
+        <RadioButton x:Name="RbtnAzerbaijan" Content="Azerbaijan" HorizontalAlignment="Left" Height="20" Margin="27,100,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
+        <RadioButton x:Name="RbtnTurkish" Content="Turkish" HorizontalAlignment="Left" Height="20" Margin="27,125,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
+        <RadioButton x:Name="RbtnArabic" Content="Arabic" HorizontalAlignment="Left" Height="20" Margin="27,150,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
+        <RadioButton x:Name="RbtnFrench" Content="French" HorizontalAlignment="Left" Height="20" Margin="27,175,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
+        <RadioButton x:Name="RbtnRussian" Content="Russian" HorizontalAlignment="Left" Height="20" Margin="27,200,0,0" VerticalAlignment="Top" Width="92"  Checked="RbtnLanguage_Checked"/>
     </Grid>
 </Window>

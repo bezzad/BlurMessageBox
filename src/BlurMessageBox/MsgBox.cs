@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -48,13 +49,13 @@ namespace BlurMessageBox
             _lblTitle.Font = new System.Drawing.Font("Segoe UI", 18);
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
-            _lblTitle.RightToLeft = Properties.Localization.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblTitle.RightToLeft = CultureInfo.DefaultThreadCurrentUICulture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
             _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
             _lblMessage.Dock = DockStyle.Fill;
-            _lblMessage.RightToLeft = Properties.Localization.Culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblMessage.RightToLeft = CultureInfo.DefaultThreadCurrentUICulture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _flpButtons.FlowDirection = FlowDirection.RightToLeft;
             _flpButtons.Dock = DockStyle.Fill;
