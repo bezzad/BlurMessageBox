@@ -44,18 +44,20 @@ namespace BlurMessageBox
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Width = 400;
 
+            var culture = CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentUICulture;
+
             _lblTitle = new Label();
             _lblTitle.ForeColor = Color.White;
             _lblTitle.Font = new System.Drawing.Font("Segoe UI", 18);
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
-            _lblTitle.RightToLeft = CultureInfo.DefaultThreadCurrentUICulture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblTitle.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
             _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
             _lblMessage.Dock = DockStyle.Fill;
-            _lblMessage.RightToLeft = CultureInfo.DefaultThreadCurrentUICulture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblMessage.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _flpButtons.FlowDirection = FlowDirection.RightToLeft;
             _flpButtons.Dock = DockStyle.Fill;

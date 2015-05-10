@@ -30,3 +30,20 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\D
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\en-US\BlurMessageBox.resources.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWinForms\bin\Debug\fa-IR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csprojResolveAssemblyReference.cache
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Form1.resources
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Properties.Resources.resources
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.exe.config
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.exe
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.pdb
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.pdb
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\ru-RU\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\ar\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\tr-TR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\az\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\fr-FR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\bin\Debug\fa-IR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
+F:\Behzad\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb

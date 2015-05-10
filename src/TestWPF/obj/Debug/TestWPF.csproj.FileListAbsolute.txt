@@ -47,3 +47,24 @@ D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\fr-FR\BlurMessageBox.resources.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\ru-RU\BlurMessageBox.resources.dll
 D:\Programming\MyProject\C# - Windows Form\BlurMessageBox\src\TestWPF\bin\Debug\tr-TR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\TestWPF.exe.config
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\TestWPF.exe
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\TestWPF.pdb
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\BlurMessageBox.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\BlurMessageBox.pdb
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\ru-RU\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\ar\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\tr-TR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\az\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\fr-FR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\bin\Debug\fa-IR\BlurMessageBox.resources.dll
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.csprojResolveAssemblyReference.cache
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\MainWindow.baml
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\MainWindow.g.cs
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\App.g.cs
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF_MarkupCompile.cache
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.g.resources
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.Properties.Resources.resources
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.csproj.GenerateResource.Cache
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.exe
+F:\Behzad\BlurMessageBox\src\TestWPF\obj\Debug\TestWPF.pdb
