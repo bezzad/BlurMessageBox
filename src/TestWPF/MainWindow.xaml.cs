@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,18 +25,23 @@ namespace TestWPF
         private void BtnLongTextMsg_Click(object sender, RoutedEventArgs e)
         {
             this.MessageBoxShow("Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
+                        Environment.NewLine +
                         "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
+                        Environment.NewLine +
                         "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
+                        Environment.NewLine +
                         "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
+                        Environment.NewLine +
                         "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String.",
-                        "Test Long Text",
+                        Environment.NewLine +
+                        "Test Long Text Title in Blur Message Box ... Test Long Text Title in Blur Message Box ... Test Long Text Title in Blur Message Box",
                          Buttons.OKCancel, Icons.Shield, AnimateStyle.SlideDown);
         }
 
         private void BtTestMsg_Click(object sender, RoutedEventArgs e)
         {
             this.MessageBoxShow("This is a test messageBox",
-                "Test", Buttons.YesNoCancel, Icons.Warning, AnimateStyle.FadeIn);
+                "Test Long Text Title in Blur Message Box", Buttons.YesNoCancel, Icons.Warning, AnimateStyle.FadeIn);
         }
 
         private void RbtnLanguage_Checked(object sender, RoutedEventArgs e)

@@ -14,11 +14,16 @@ namespace BlurMessageBox
     {
         #region Properties
 
+        public static Font TitleFont = new System.Drawing.Font("Segoe UI", 18);
+        public static Font MessageFont = new System.Drawing.Font("Segoe UI", 10);
+
         private const int CS_DROPSHADOW = 0x00020000;
         private static MsgBox _msgBox;
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
         private static Point _lastMousePos;
+        private const int CHAR_LENGTH = 6;
+        private const int PADDING = 200;
 
         private Panel _plHeader = new Panel();
         private Panel _plFooter = new Panel();
@@ -48,14 +53,14 @@ namespace BlurMessageBox
 
             _lblTitle = new Label();
             _lblTitle.ForeColor = Color.White;
-            _lblTitle.Font = new System.Drawing.Font("Segoe UI", 18);
+            _lblTitle.Font = TitleFont;
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
             _lblTitle.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
             _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
-            _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
+            _lblMessage.Font = MessageFont;
             _lblMessage.Dock = DockStyle.Fill;
             _lblMessage.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
 
@@ -110,7 +115,7 @@ namespace BlurMessageBox
         {
             _msgBox = new MsgBox();
             _msgBox._lblMessage.Text = message;
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, "");
 
             MsgBox.InitButtons(Buttons.OK);
 
@@ -124,7 +129,7 @@ namespace BlurMessageBox
             _msgBox = new MsgBox();
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
 
             MsgBox.InitButtons(Buttons.OK);
 
@@ -142,7 +147,7 @@ namespace BlurMessageBox
 
             MsgBox.InitButtons(buttons);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
             _msgBox.ShowDialog();
             MessageBeep(0);
             return _buttonResult;
@@ -157,7 +162,7 @@ namespace BlurMessageBox
             MsgBox.InitButtons(buttons);
             MsgBox.InitIcon(icon);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
             _msgBox.ShowDialog();
             MessageBeep(0);
             return _buttonResult;
@@ -174,7 +179,7 @@ namespace BlurMessageBox
             MsgBox.InitIcon(icon);
 
             _timer = new Timer();
-            Size formSize = MsgBox.MessageSize(message);
+            Size formSize = MsgBox.MessageSize(message, title);
 
             switch (style)
             {
@@ -219,7 +224,7 @@ namespace BlurMessageBox
 
             MsgBox.InitButtons(Buttons.OK);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, "");
 
             _msgBox.ShowDialog();
             MessageBeep(0);
@@ -236,11 +241,11 @@ namespace BlurMessageBox
             _msgBox.StartPosition = FormStartPosition.CenterParent;
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
 
             MsgBox.InitButtons(Buttons.OK);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
 
             _msgBox.ShowDialog();
             MessageBeep(0);
@@ -262,7 +267,7 @@ namespace BlurMessageBox
 
             MsgBox.InitButtons(buttons);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
 
             _msgBox.ShowDialog();
             MessageBeep(0);
@@ -283,7 +288,7 @@ namespace BlurMessageBox
             MsgBox.InitButtons(buttons);
             MsgBox.InitIcon(icon);
 
-            _msgBox.Size = MsgBox.MessageSize(message);
+            _msgBox.Size = MsgBox.MessageSize(message, title);
 
             _msgBox.ShowDialog();
             MessageBeep(0);
@@ -306,7 +311,7 @@ namespace BlurMessageBox
             MsgBox.InitIcon(icon);
 
             _timer = new Timer();
-            Size formSize = MsgBox.MessageSize(message);
+            Size formSize = MsgBox.MessageSize(message, title);
 
             switch (style)
             {
@@ -399,29 +404,31 @@ namespace BlurMessageBox
             _msgBox.Dispose();
         }
 
-        private static Size MessageSize(string message)
+        private static Size MessageSize(string message, string title)
         {
             Graphics g = _msgBox.CreateGraphics();
             int width = 350;
             int height = 250;
 
-            SizeF size = g.MeasureString(message, new System.Drawing.Font("Segoe UI", 10));
+            SizeF msgSize = g.MeasureString(message, MessageFont);
+            SizeF titleSize = g.MeasureString(title, TitleFont);
+            msgSize.Width = Math.Max(msgSize.Width, titleSize.Width + PADDING);
 
             if (message.Length < 150)
             {
-                if ((int)size.Width > 350)
+                if (msgSize.Width > 350)
                 {
-                    width = (int)size.Width;
+                    width = (int)msgSize.Width;
                 }
             }
             else
             {
-                string[] groups = (from Match m in Regex.Matches(message, ".{1,180}") select m.Value).ToArray();
-                int maxLineLength = groups.Max(x => x.Length);
-                int charachterLength = 6;
-                int padding = 200;
-                width = (width > padding + maxLineLength * charachterLength) ? width : padding + maxLineLength * charachterLength;
-                height += (int)(size.Height);
+                //string[] groups = (from Match m in Regex.Matches(message, ".{1,180}") select m.Value).ToArray();
+                string[] groups = message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int maxLineLength = Math.Max(groups.Max(x => x.Length), (int)titleSize.Width);
+
+                width = (width > PADDING + maxLineLength * CHAR_LENGTH) ? width : PADDING + maxLineLength * CHAR_LENGTH;
+                height += (int)(msgSize.Height);
             }
             return new Size(width, height);
         }
