@@ -1,12 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using Application = System.Windows.Forms.Application;
+using FlowDirection = System.Windows.Forms.FlowDirection;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace BlurMessageBox
 {
@@ -203,6 +204,8 @@ namespace BlurMessageBox
                     break;
             }
 
+            _msgBox.CenterToParent(formSize);
+
             _timer.Tick += timer_Tick;
             _timer.Start();
 
@@ -210,7 +213,9 @@ namespace BlurMessageBox
             MessageBeep(0);
             return _buttonResult;
         }
+
         #endregion
+
         #region BlurWindows MessageBox.Show Methods
         public static DialogResult Show(string message, System.Windows.Window win)
         {
@@ -302,17 +307,17 @@ namespace BlurMessageBox
             win.ApplyEffect();
 
             _msgBox = new MsgBox();
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
+            Size formSize = MsgBox.MessageSize(message, title);
+            _msgBox.Size = formSize;
+            _msgBox.StartPosition = FormStartPosition.CenterParent;
             _msgBox.Height = 0;
 
             MsgBox.InitButtons(buttons);
             MsgBox.InitIcon(icon);
 
             _timer = new Timer();
-            Size formSize = MsgBox.MessageSize(message, title);
-
             switch (style)
             {
                 case AnimateStyle.SlideDown:
@@ -335,9 +340,8 @@ namespace BlurMessageBox
                     break;
             }
             _timer.Tick += timer_Tick;
-
-
             _timer.Start();
+
             _msgBox.ShowDialog();
             MessageBeep(0);
 
@@ -345,6 +349,7 @@ namespace BlurMessageBox
 
             return _buttonResult;
         }
+
         #endregion
 
         #region Static Methods
@@ -425,9 +430,19 @@ namespace BlurMessageBox
             {
                 //string[] groups = (from Match m in Regex.Matches(message, ".{1,180}") select m.Value).ToArray();
                 string[] groups = message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                int maxLineLength = Math.Max(groups.Max(x => x.Length), (int)titleSize.Width);
 
-                width = (width > PADDING + maxLineLength * CHAR_LENGTH) ? width : PADDING + maxLineLength * CHAR_LENGTH;
+                string maxString = " ";
+                foreach (var item in groups)
+                {
+                    if (item.Length > maxString.Length)
+                        maxString = item;
+                }
+
+                //int maxLineLength = Math.Max(groups.Max(x => x.Length), (int)titleSize.Width);
+
+                var maxLen = PADDING + (int)g.MeasureString(maxString, MessageFont).Width;
+
+                width = (width > maxLen) ? width : maxLen;
                 height += (int)(msgSize.Height);
             }
             return new Size(width, height);
@@ -566,6 +581,46 @@ namespace BlurMessageBox
 
         #region Methods
 
+        public Form GetParentForm()
+        {
+            Form parent = ActiveForm;
+
+            if (parent != null) return parent;
+            else if (Application.OpenForms.Count > 0)
+            {
+                parent = Application.OpenForms[0];
+            }
+
+            return parent;
+        }
+
+        /// <summary>
+        /// Center Message Form To WinForm Parent
+        /// </summary>
+        public void CenterToParent(Size finalSize)
+        {
+            _msgBox.StartPosition = FormStartPosition.Manual;
+            Point centerPos = new Point();
+
+            var parent = GetParentForm();
+            if (parent != null) // Center to Parent
+            {
+                var pW = parent.Size.Width;
+                var pH = parent.Size.Height;
+                var pX = parent.Location.X;
+                var pY = parent.Location.Y;
+
+                centerPos.X = pX + ((pW - finalSize.Width) / 2);
+                centerPos.Y = pY + ((pH - finalSize.Height) / 2);
+            }
+            else // Center to Screen
+            {
+                this.StartPosition = FormStartPosition.CenterParent;
+            }
+
+            this.Location = centerPos;
+        }
+        
         private Button GetOkButton()
         {
             Button btnOk = new Button();

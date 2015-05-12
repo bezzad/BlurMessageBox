@@ -26,27 +26,9 @@ namespace TestWinForms
 
         private void btnLongText_Click(object sender, EventArgs e)
         {
-            MsgBox.Show("Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String.",
+            MsgBox.Show("Test Long String Test Long String Test Long String " + Environment.NewLine +
+                        "Test Long String Test Long String Test Long String " + Environment.NewLine + 
+                        "Test Long String Test Long String Test Long String.",
                         "Test Long Text",
                          Buttons.OKCancel, Icons.Shield, AnimateStyle.SlideDown);
         }

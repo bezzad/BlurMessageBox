@@ -28,13 +28,8 @@ namespace TestWPF
                         Environment.NewLine +
                         "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
                         Environment.NewLine +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        Environment.NewLine +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String" +
-                        Environment.NewLine +
-                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String.",
-                        Environment.NewLine +
-                        "Test Long Text Title in Blur Message Box ... Test Long Text Title in Blur Message Box ... Test Long Text Title in Blur Message Box",
+                        "Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String Test Long String"
+                        ,"Test Long Text Title in Blur Message Box",
                          Buttons.OKCancel, Icons.Shield, AnimateStyle.SlideDown);
         }
 
