@@ -23,7 +23,6 @@ namespace BlurMessageBox
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
         private static Point _lastMousePos;
-        private const int CHAR_LENGTH = 6;
         private const int PADDING = 200;
 
         private Panel _plHeader = new Panel();
@@ -439,10 +438,10 @@ namespace BlurMessageBox
                 }
 
                 //int maxLineLength = Math.Max(groups.Max(x => x.Length), (int)titleSize.Width);
+                int maxLineLength = PADDING +
+                        (int)Math.Max(g.MeasureString(maxString, MessageFont).Width, titleSize.Width);
 
-                var maxLen = PADDING + (int)g.MeasureString(maxString, MessageFont).Width;
-
-                width = (width > maxLen) ? width : maxLen;
+                width = (width > maxLineLength) ? width : maxLineLength;
                 height += (int)(msgSize.Height);
             }
             return new Size(width, height);
@@ -620,7 +619,7 @@ namespace BlurMessageBox
 
             this.Location = centerPos;
         }
-        
+
         private Button GetOkButton()
         {
             Button btnOk = new Button();
