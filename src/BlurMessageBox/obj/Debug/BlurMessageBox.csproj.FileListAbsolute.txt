@@ -106,3 +106,28 @@ H:\Behzad\BlurMessageBox\src\BlurMessageBox\obj\Debug\az\BlurMessageBox.resource
 H:\Behzad\BlurMessageBox\src\BlurMessageBox\obj\Debug\fr-FR\BlurMessageBox.resources.dll
 H:\Behzad\BlurMessageBox\src\BlurMessageBox\obj\Debug\fa-IR\BlurMessageBox.resources.dll
 H:\Behzad\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\ru-RU\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\ar\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\tr-TR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\az\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\fr-FR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\bin\Debug\fa-IR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csprojResolveAssemblyReference.cache
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.ru-RU.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.ar.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.tr-TR.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.az.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.fr-FR.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.Properties.Localization.fa-IR.resources
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.csproj.GenerateResource.Cache
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\ru-RU\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\ar\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\tr-TR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\az\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\fr-FR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\fa-IR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\C# - Library\BlurMessageBox\src\BlurMessageBox\obj\Debug\BlurMessageBox.pdb

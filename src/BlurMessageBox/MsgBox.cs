@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,6 +12,7 @@ using Size = System.Drawing.Size;
 
 namespace BlurMessageBox
 {
+    [DebuggerStepThrough]
     public sealed class MsgBox : Form
     {
         #region Properties
@@ -19,11 +21,12 @@ namespace BlurMessageBox
         public static Font MessageFont = new System.Drawing.Font("Segoe UI", 10);
 
         private const int CS_DROPSHADOW = 0x00020000;
+        private const int PADDING = 200;
         private static MsgBox _msgBox;
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
         private static Point _lastMousePos;
-        private const int PADDING = 200;
+        private static object _syncLocker = new object();
 
         private Panel _plHeader = new Panel();
         private Panel _plFooter = new Panel();
@@ -41,6 +44,7 @@ namespace BlurMessageBox
 
         #region Constructors
 
+        [DebuggerStepThrough]
         private MsgBox()
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -111,6 +115,8 @@ namespace BlurMessageBox
         #endregion
 
         #region Normal MessageBox.Show Methods
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message)
         {
             _msgBox = new MsgBox();
@@ -119,11 +125,13 @@ namespace BlurMessageBox
 
             MsgBox.InitButtons(Buttons.OK);
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
             return _buttonResult;
         }
 
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title)
         {
             _msgBox = new MsgBox();
@@ -133,11 +141,13 @@ namespace BlurMessageBox
 
             MsgBox.InitButtons(Buttons.OK);
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
             return _buttonResult;
         }
 
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons)
         {
             _msgBox = new MsgBox();
@@ -148,11 +158,14 @@ namespace BlurMessageBox
             MsgBox.InitButtons(buttons);
 
             _msgBox.Size = MsgBox.MessageSize(message, title);
-            _msgBox.ShowDialog();
+
+            _msgBox.ShowForm();
+
             MessageBeep(0);
             return _buttonResult;
         }
 
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon)
         {
             _msgBox = new MsgBox();
@@ -163,11 +176,14 @@ namespace BlurMessageBox
             MsgBox.InitIcon(icon);
 
             _msgBox.Size = MsgBox.MessageSize(message, title);
-            _msgBox.ShowDialog();
+
+            _msgBox.ShowForm();
+
             MessageBeep(0);
             return _buttonResult;
         }
 
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon, AnimateStyle style)
         {
             _msgBox = new MsgBox();
@@ -208,7 +224,8 @@ namespace BlurMessageBox
             _timer.Tick += timer_Tick;
             _timer.Start();
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
             return _buttonResult;
         }
@@ -216,6 +233,8 @@ namespace BlurMessageBox
         #endregion
 
         #region BlurWindows MessageBox.Show Methods
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, System.Windows.Window win)
         {
             win.ApplyEffect();
@@ -230,13 +249,16 @@ namespace BlurMessageBox
 
             _msgBox.Size = MsgBox.MessageSize(message, "");
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
 
             win.ClearEffect();
 
             return _buttonResult;
         }
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, System.Windows.Window win)
         {
             win.ApplyEffect();
@@ -251,14 +273,16 @@ namespace BlurMessageBox
 
             _msgBox.Size = MsgBox.MessageSize(message, title);
 
-            _msgBox.ShowDialog();
-            MessageBeep(0);
+            _msgBox.ShowForm();
 
+            MessageBeep(0);
 
             win.ClearEffect();
 
             return _buttonResult;
         }
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, System.Windows.Window win)
         {
             win.ApplyEffect();
@@ -273,13 +297,16 @@ namespace BlurMessageBox
 
             _msgBox.Size = MsgBox.MessageSize(message, title);
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
 
             win.ClearEffect();
 
             return _buttonResult;
         }
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon, System.Windows.Window win)
         {
             win.ApplyEffect();
@@ -294,13 +321,16 @@ namespace BlurMessageBox
 
             _msgBox.Size = MsgBox.MessageSize(message, title);
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
 
             win.ClearEffect();
 
             return _buttonResult;
         }
+
+        [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon, AnimateStyle style, System.Windows.Window win)
         {
             win.ApplyEffect();
@@ -341,7 +371,8 @@ namespace BlurMessageBox
             _timer.Tick += timer_Tick;
             _timer.Start();
 
-            _msgBox.ShowDialog();
+            _msgBox.ShowForm();
+
             MessageBeep(0);
 
             win.ClearEffect();
@@ -353,6 +384,7 @@ namespace BlurMessageBox
 
         #region Static Methods
 
+        [DebuggerStepThrough]
         private static void MsgBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -361,6 +393,7 @@ namespace BlurMessageBox
             }
         }
 
+        [DebuggerStepThrough]
         private static void MsgBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -370,6 +403,7 @@ namespace BlurMessageBox
             }
         }
 
+        [DebuggerStepThrough]
         private static void ButtonClick(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -408,6 +442,7 @@ namespace BlurMessageBox
             _msgBox.Dispose();
         }
 
+        [DebuggerStepThrough]
         private static Size MessageSize(string message, string title)
         {
             Graphics g = _msgBox.CreateGraphics();
@@ -447,6 +482,7 @@ namespace BlurMessageBox
             return new Size(width, height);
         }
 
+        [DebuggerStepThrough]
         private static void timer_Tick(object sender, EventArgs e)
         {
             Timer timer = (Timer)sender;
@@ -500,6 +536,7 @@ namespace BlurMessageBox
             }
         }
 
+        [DebuggerStepThrough]
         private static void InitButtons(Buttons buttons)
         {
             switch (buttons)
@@ -542,6 +579,7 @@ namespace BlurMessageBox
             }
         }
 
+        [DebuggerStepThrough]
         private static void InitIcon(Icons icon)
         {
             switch (icon)
@@ -579,6 +617,19 @@ namespace BlurMessageBox
         #endregion
 
         #region Methods
+
+        [DebuggerStepperBoundary]
+        [DebuggerStepThrough]
+        private void ShowForm()
+        {
+            lock (_syncLocker)
+            {
+                if (_msgBox.IsHandleCreated)
+                {
+                    _msgBox.BeginInvoke(new Action(() => _msgBox.ShowDialog()));
+                }
+            }
+        }
 
         public Form GetParentForm()
         {
