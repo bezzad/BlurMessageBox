@@ -20,19 +20,19 @@ namespace BlurMessageBox
         public static Font TitleFont = new System.Drawing.Font("Segoe UI", 18);
         public static Font MessageFont = new System.Drawing.Font("Segoe UI", 10);
 
+        private static readonly object SyncLocker = new object();
         private const int CS_DROPSHADOW = 0x00020000;
         private const int PADDING = 200;
-        private static MsgBox _msgBox;
-        private static DialogResult _buttonResult = new DialogResult();
-        private static Timer _timer;
-        private static Point _lastMousePos;
-        private static object _syncLocker = new object();
 
-        private Panel _plHeader = new Panel();
-        private Panel _plFooter = new Panel();
-        private Panel _plIcon = new Panel();
-        private PictureBox _picIcon = new PictureBox();
-        private FlowLayoutPanel _flpButtons = new FlowLayoutPanel();
+        private DialogResult _buttonResult;
+        private Timer _timer;
+        private Point _lastMousePos;
+
+        private Panel _plHeader;
+        private Panel _plFooter;
+        private Panel _plIcon;
+        private PictureBox _picIcon;
+        private FlowLayoutPanel _flpButtons;
         private Label _lblTitle;
         private Label _lblMessage;
         private List<Button> _buttonCollection = new List<Button>();
@@ -55,51 +55,54 @@ namespace BlurMessageBox
 
             var culture = CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentUICulture;
 
-            _lblTitle = new Label();
-            _lblTitle.ForeColor = Color.White;
-            _lblTitle.Font = TitleFont;
-            _lblTitle.Dock = DockStyle.Top;
-            _lblTitle.Height = 50;
-            _lblTitle.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblTitle = new Label
+            {
+                ForeColor = Color.White,
+                Font = TitleFont,
+                Dock = DockStyle.Top,
+                Height = 50,
+                RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No
+            };
 
-            _lblMessage = new Label();
-            _lblMessage.ForeColor = Color.White;
-            _lblMessage.Font = MessageFont;
-            _lblMessage.Dock = DockStyle.Fill;
-            _lblMessage.RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No;
+            _lblMessage = new Label
+            {
+                ForeColor = Color.White,
+                Font = MessageFont,
+                Dock = DockStyle.Fill,
+                RightToLeft = culture.TextInfo.IsRightToLeft ? RightToLeft.Yes : RightToLeft.No
+            };
 
-            _flpButtons.FlowDirection = FlowDirection.RightToLeft;
-            _flpButtons.Dock = DockStyle.Fill;
+            _flpButtons = new FlowLayoutPanel { FlowDirection = FlowDirection.RightToLeft, Dock = DockStyle.Fill };
 
-            _plHeader.Dock = DockStyle.Fill;
-            _plHeader.Padding = new Padding(20);
+            _plHeader = new Panel { Dock = DockStyle.Fill, Padding = new Padding(20) };
             _plHeader.Controls.Add(_lblMessage);
             _plHeader.Controls.Add(_lblTitle);
 
-            _plFooter.Dock = DockStyle.Bottom;
-            _plFooter.Padding = new Padding(20);
-            _plFooter.BackColor = Color.FromArgb(37, 37, 38);
-            _plFooter.Height = 80;
+            _plFooter = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Padding = new Padding(20),
+                BackColor = Color.FromArgb(37, 37, 38),
+                Height = 80
+            };
             _plFooter.Controls.Add(_flpButtons);
 
-            _picIcon.Width = 32;
-            _picIcon.Height = 32;
-            _picIcon.Location = new Point(30, 50);
+            _picIcon = new PictureBox { Width = 32, Height = 32, Location = new Point(30, 50) };
 
-            _plIcon.Dock = DockStyle.Left;
-            _plIcon.Padding = new Padding(20);
-            _plIcon.Width = 70;
+            _plIcon = new Panel { Dock = DockStyle.Left, Padding = new Padding(20), Width = 70 };
             _plIcon.Controls.Add(_picIcon);
 
-            List<Control> controlCollection = new List<Control>();
-            controlCollection.Add(this);
-            controlCollection.Add(_lblTitle);
-            controlCollection.Add(_lblMessage);
-            controlCollection.Add(_flpButtons);
-            controlCollection.Add(_plHeader);
-            controlCollection.Add(_plFooter);
-            controlCollection.Add(_plIcon);
-            controlCollection.Add(_picIcon);
+            var controlCollection = new List<Control>
+            {
+                this,
+                _lblTitle,
+                _lblMessage,
+                _flpButtons,
+                _plHeader,
+                _plFooter,
+                _plIcon,
+                _picIcon
+            };
 
             foreach (Control control in controlCollection)
             {
@@ -119,115 +122,110 @@ namespace BlurMessageBox
         [DebuggerStepThrough]
         public static DialogResult Show(string message)
         {
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox.Size = MsgBox.MessageSize(message, "");
+            var msgBox = new MsgBox();
+            msgBox._lblMessage.Text = message;
+            msgBox.Size = msgBox.MessageSize(message, "");
 
-            MsgBox.InitButtons(Buttons.OK);
+            msgBox.InitButtons(Buttons.OK);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
         public static DialogResult Show(string message, string title)
         {
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            var msgBox = new MsgBox
+            {
+                _lblMessage = { Text = message },
+                _lblTitle = { Text = title },
+            };
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            MsgBox.InitButtons(Buttons.OK);
+            msgBox.InitButtons(Buttons.OK);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons)
         {
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            _msgBox._plIcon.Hide();
+            var msgBox = new MsgBox { _lblMessage = { Text = message }, _lblTitle = { Text = title } };
+            msgBox._plIcon.Hide();
 
-            MsgBox.InitButtons(buttons);
+            msgBox.InitButtons(buttons);
 
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon)
         {
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
+            var msgBox = new MsgBox { _lblMessage = { Text = message }, _lblTitle = { Text = title } };
 
-            MsgBox.InitButtons(buttons);
-            MsgBox.InitIcon(icon);
+            msgBox.InitButtons(buttons);
+            msgBox.InitIcon(icon);
 
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
         public static DialogResult Show(string message, string title, Buttons buttons, Icons icon, AnimateStyle style)
         {
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            _msgBox.Height = 0;
+            var msgBox = new MsgBox { _lblMessage = { Text = message }, _lblTitle = { Text = title }, Height = 0 };
 
-            MsgBox.InitButtons(buttons);
-            MsgBox.InitIcon(icon);
+            msgBox.InitButtons(buttons);
+            msgBox.InitIcon(icon);
 
-            _timer = new Timer();
-            Size formSize = MsgBox.MessageSize(message, title);
+            msgBox._timer = new Timer();
+            Size formSize = msgBox.MessageSize(message, title);
 
             switch (style)
             {
                 case AnimateStyle.SlideDown:
-                    _msgBox.Size = new Size(formSize.Width, 0);
-                    _timer.Interval = 1;
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox.Size = new Size(formSize.Width, 0);
+                    msgBox._timer.Interval = 1;
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
                     break;
 
                 case AnimateStyle.FadeIn:
-                    _msgBox.Size = formSize;
-                    _msgBox.Opacity = 0;
-                    _timer.Interval = 20;
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox.Size = formSize;
+                    msgBox.Opacity = 0;
+                    msgBox._timer.Interval = 20;
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
                     break;
 
                 case AnimateStyle.ZoomIn:
-                    _msgBox.Size = new Size(formSize.Width + 100, formSize.Height + 100);
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
-                    _timer.Interval = 1;
+                    msgBox.Size = new Size(formSize.Width + 100, formSize.Height + 100);
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox._timer.Interval = 1;
                     break;
             }
 
-            _msgBox.CenterToParent(formSize);
+            msgBox.CenterToParent(formSize);
 
-            _timer.Tick += timer_Tick;
-            _timer.Start();
+            msgBox._timer.Tick += msgBox.timer_Tick;
+            msgBox._timer.Start();
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         #endregion
@@ -239,23 +237,19 @@ namespace BlurMessageBox
         {
             win.ApplyEffect();
 
-            _msgBox = new MsgBox();
+            var msgBox = new MsgBox { StartPosition = FormStartPosition.CenterParent, _lblMessage = { Text = message } };
 
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
+            msgBox.InitButtons(Buttons.OK);
 
-            _msgBox._lblMessage.Text = message;
+            msgBox.Size = msgBox.MessageSize(message, "");
 
-            MsgBox.InitButtons(Buttons.OK);
-
-            _msgBox.Size = MsgBox.MessageSize(message, "");
-
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
 
             win.ClearEffect();
 
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
@@ -263,23 +257,25 @@ namespace BlurMessageBox
         {
             win.ApplyEffect();
 
-            _msgBox = new MsgBox();
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            var msgBox = new MsgBox
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                _lblMessage = { Text = message },
+                _lblTitle = { Text = title },
+            };
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            MsgBox.InitButtons(Buttons.OK);
+            msgBox.InitButtons(Buttons.OK);
 
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
 
             win.ClearEffect();
 
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
@@ -287,23 +283,25 @@ namespace BlurMessageBox
         {
             win.ApplyEffect();
 
-            _msgBox = new MsgBox();
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            _msgBox._plIcon.Hide();
+            var msgBox = new MsgBox
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                _lblMessage = { Text = message },
+                _lblTitle = { Text = title }
+            };
+            msgBox._plIcon.Hide();
 
-            MsgBox.InitButtons(buttons);
+            msgBox.InitButtons(buttons);
 
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
 
             win.ClearEffect();
 
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
@@ -311,23 +309,25 @@ namespace BlurMessageBox
         {
             win.ApplyEffect();
 
-            _msgBox = new MsgBox();
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
+            var msgBox = new MsgBox
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                _lblMessage = { Text = message },
+                _lblTitle = { Text = title }
+            };
 
-            MsgBox.InitButtons(buttons);
-            MsgBox.InitIcon(icon);
+            msgBox.InitButtons(buttons);
+            msgBox.InitIcon(icon);
 
-            _msgBox.Size = MsgBox.MessageSize(message, title);
+            msgBox.Size = msgBox.MessageSize(message, title);
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
 
             win.ClearEffect();
 
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         [DebuggerStepThrough]
@@ -335,49 +335,47 @@ namespace BlurMessageBox
         {
             win.ApplyEffect();
 
-            _msgBox = new MsgBox();
-            _msgBox._lblMessage.Text = message;
-            _msgBox._lblTitle.Text = title;
-            Size formSize = MsgBox.MessageSize(message, title);
-            _msgBox.Size = formSize;
-            _msgBox.StartPosition = FormStartPosition.CenterParent;
-            _msgBox.Height = 0;
+            var msgBox = new MsgBox { _lblMessage = { Text = message }, _lblTitle = { Text = title } };
+            Size formSize = msgBox.MessageSize(message, title);
+            msgBox.Size = formSize;
+            msgBox.StartPosition = FormStartPosition.CenterParent;
+            msgBox.Height = 0;
 
-            MsgBox.InitButtons(buttons);
-            MsgBox.InitIcon(icon);
+            msgBox.InitButtons(buttons);
+            msgBox.InitIcon(icon);
 
-            _timer = new Timer();
+            msgBox._timer = new Timer();
             switch (style)
             {
                 case AnimateStyle.SlideDown:
-                    _msgBox.Size = new Size(formSize.Width, 0);
-                    _timer.Interval = 1;
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox.Size = new Size(formSize.Width, 0);
+                    msgBox._timer.Interval = 1;
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
                     break;
 
                 case AnimateStyle.FadeIn:
-                    _msgBox.Size = formSize;
-                    _msgBox.Opacity = 0;
-                    _timer.Interval = 20;
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox.Size = formSize;
+                    msgBox.Opacity = 0;
+                    msgBox._timer.Interval = 20;
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
                     break;
 
                 case AnimateStyle.ZoomIn:
-                    _msgBox.Size = new Size(formSize.Width + 100, formSize.Height + 100);
-                    _timer.Tag = new AnimateMsgBox(formSize, style);
-                    _timer.Interval = 1;
+                    msgBox.Size = new Size(formSize.Width + 100, formSize.Height + 100);
+                    msgBox._timer.Tag = new AnimateMsgBox(formSize, style);
+                    msgBox._timer.Interval = 1;
                     break;
             }
-            _timer.Tick += timer_Tick;
-            _timer.Start();
+            msgBox._timer.Tick += msgBox.timer_Tick;
+            msgBox._timer.Start();
 
-            _msgBox.ShowForm();
+            ShowForm(msgBox);
 
             MessageBeep(0);
 
             win.ClearEffect();
 
-            return _buttonResult;
+            return msgBox._buttonResult;
         }
 
         #endregion
@@ -385,7 +383,7 @@ namespace BlurMessageBox
         #region Static Methods
 
         [DebuggerStepThrough]
-        private static void MsgBox_MouseDown(object sender, MouseEventArgs e)
+        private void MsgBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -394,17 +392,17 @@ namespace BlurMessageBox
         }
 
         [DebuggerStepThrough]
-        private static void MsgBox_MouseMove(object sender, MouseEventArgs e)
+        private void MsgBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                _msgBox.Left += e.X - _lastMousePos.X;
-                _msgBox.Top += e.Y - _lastMousePos.Y;
+                this.Left += e.X - _lastMousePos.X;
+                this.Top += e.Y - _lastMousePos.Y;
             }
         }
 
         [DebuggerStepThrough]
-        private static void ButtonClick(object sender, EventArgs e)
+        private void ButtonClick(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
 
@@ -439,13 +437,13 @@ namespace BlurMessageBox
                     break;
             }
 
-            _msgBox.Dispose();
+            this.Dispose();
         }
 
         [DebuggerStepThrough]
-        private static Size MessageSize(string message, string title)
+        private Size MessageSize(string message, string title)
         {
-            Graphics g = _msgBox.CreateGraphics();
+            Graphics g = this.CreateGraphics();
             int width = 350;
             int height = 250;
 
@@ -483,7 +481,7 @@ namespace BlurMessageBox
         }
 
         [DebuggerStepThrough]
-        private static void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             Timer timer = (Timer)sender;
             AnimateMsgBox animate = (AnimateMsgBox)timer.Tag;
@@ -491,10 +489,10 @@ namespace BlurMessageBox
             switch (animate.Style)
             {
                 case AnimateStyle.SlideDown:
-                    if (_msgBox.Height < animate.FormSize.Height)
+                    if (this.Height < animate.FormSize.Height)
                     {
-                        _msgBox.Height += 17;
-                        _msgBox.Invalidate();
+                        this.Height += 17;
+                        this.Invalidate();
                     }
                     else
                     {
@@ -504,10 +502,10 @@ namespace BlurMessageBox
                     break;
 
                 case AnimateStyle.FadeIn:
-                    if (_msgBox.Opacity < 1)
+                    if (this.Opacity < 1)
                     {
-                        _msgBox.Opacity += 0.1;
-                        _msgBox.Invalidate();
+                        this.Opacity += 0.1;
+                        this.Invalidate();
                     }
                     else
                     {
@@ -517,17 +515,17 @@ namespace BlurMessageBox
                     break;
 
                 case AnimateStyle.ZoomIn:
-                    if (_msgBox.Width > animate.FormSize.Width)
+                    if (this.Width > animate.FormSize.Width)
                     {
-                        _msgBox.Width -= 17;
-                        _msgBox.Invalidate();
+                        this.Width -= 17;
+                        this.Invalidate();
                     }
-                    if (_msgBox.Height > animate.FormSize.Height)
+                    if (this.Height > animate.FormSize.Height)
                     {
-                        _msgBox.Height -= 17;
-                        _msgBox.Invalidate();
+                        this.Height -= 17;
+                        this.Invalidate();
                     }
-                    if (_msgBox.Width <= animate.FormSize.Width && _msgBox.Height <= animate.FormSize.Height)
+                    if (this.Width <= animate.FormSize.Width && this.Height <= animate.FormSize.Height)
                     {
                         _timer.Stop();
                         _timer.Dispose();
@@ -537,36 +535,36 @@ namespace BlurMessageBox
         }
 
         [DebuggerStepThrough]
-        private static void InitButtons(Buttons buttons)
+        private void InitButtons(Buttons buttons)
         {
             switch (buttons)
             {
                 case Buttons.AbortRetryIgnore:
-                    _msgBox.InitAbortRetryIgnoreButtons();
+                    this.InitAbortRetryIgnoreButtons();
                     break;
 
                 case Buttons.OK:
-                    _msgBox.InitOkButton();
+                    this.InitOkButton();
                     break;
 
                 case Buttons.OKCancel:
-                    _msgBox.InitOkCancelButtons();
+                    this.InitOkCancelButtons();
                     break;
 
                 case Buttons.RetryCancel:
-                    _msgBox.InitRetryCancelButtons();
+                    this.InitRetryCancelButtons();
                     break;
 
                 case Buttons.YesNo:
-                    _msgBox.InitYesNoButtons();
+                    this.InitYesNoButtons();
                     break;
 
                 case Buttons.YesNoCancel:
-                    _msgBox.InitYesNoCancelButtons();
+                    this.InitYesNoCancelButtons();
                     break;
             }
 
-            foreach (Button btn in _msgBox._buttonCollection)
+            foreach (Button btn in this._buttonCollection)
             {
                 btn.ForeColor = Color.FromArgb(170, 170, 170);
                 btn.Font = new System.Drawing.Font("Segoe UI", 8);
@@ -575,41 +573,41 @@ namespace BlurMessageBox
                 btn.Height = 30;
                 btn.FlatAppearance.BorderColor = Color.FromArgb(99, 99, 98);
 
-                _msgBox._flpButtons.Controls.Add(btn);
+                this._flpButtons.Controls.Add(btn);
             }
         }
 
         [DebuggerStepThrough]
-        private static void InitIcon(Icons icon)
+        private void InitIcon(Icons icon)
         {
             switch (icon)
             {
                 case Icons.Application:
-                    _msgBox._picIcon.Image = SystemIcons.Application.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Application.ToBitmap();
                     break;
 
                 case Icons.Exclamation:
-                    _msgBox._picIcon.Image = SystemIcons.Exclamation.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Exclamation.ToBitmap();
                     break;
 
                 case Icons.Error:
-                    _msgBox._picIcon.Image = SystemIcons.Error.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Error.ToBitmap();
                     break;
 
                 case Icons.Info:
-                    _msgBox._picIcon.Image = SystemIcons.Information.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Information.ToBitmap();
                     break;
 
                 case Icons.Question:
-                    _msgBox._picIcon.Image = SystemIcons.Question.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Question.ToBitmap();
                     break;
 
                 case Icons.Shield:
-                    _msgBox._picIcon.Image = SystemIcons.Shield.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Shield.ToBitmap();
                     break;
 
                 case Icons.Warning:
-                    _msgBox._picIcon.Image = SystemIcons.Warning.ToBitmap();
+                    this._picIcon.Image = SystemIcons.Warning.ToBitmap();
                     break;
             }
         }
@@ -620,13 +618,13 @@ namespace BlurMessageBox
 
         [DebuggerStepperBoundary]
         [DebuggerStepThrough]
-        private void ShowForm()
+        private static void ShowForm(MsgBox msgBox)
         {
-            lock (_syncLocker)
+            lock (SyncLocker)
             {
-                if (_msgBox.IsHandleCreated)
+                if (msgBox.IsHandleCreated)
                 {
-                    _msgBox.BeginInvoke(new Action(() => _msgBox.ShowDialog()));
+                    msgBox.BeginInvoke(new Action(() => msgBox.ShowDialog()));
                 }
             }
         }
@@ -649,7 +647,7 @@ namespace BlurMessageBox
         /// </summary>
         public void CenterToParent(Size finalSize)
         {
-            _msgBox.StartPosition = FormStartPosition.Manual;
+            this.StartPosition = FormStartPosition.Manual;
             Point centerPos = new Point();
 
             var parent = GetParentForm();
