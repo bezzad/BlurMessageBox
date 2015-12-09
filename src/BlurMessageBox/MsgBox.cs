@@ -9,6 +9,7 @@ using Application = System.Windows.Forms.Application;
 using FlowDirection = System.Windows.Forms.FlowDirection;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
+using System.Text;
 
 namespace BlurMessageBox
 {
@@ -19,10 +20,15 @@ namespace BlurMessageBox
 
         public static Font TitleFont = new System.Drawing.Font("Segoe UI", 18);
         public static Font MessageFont = new System.Drawing.Font("Segoe UI", 10);
-
         private static readonly object SyncLocker = new object();
+        private static readonly Padding BoxPadding = new Padding(200, 0, 0, 200);
+
         private const int CS_DROPSHADOW = 0x00020000;
-        private const int PADDING = 200;
+        private const int MinWidth = 350;
+        private const int MinHeight = 250;
+        private readonly Graphics _graphics;
+        private const int cGrip = 16; // Grip size
+        private const int cCaption = 32; // Caption bar height;
 
         private DialogResult _buttonResult;
         private Timer _timer;
@@ -52,6 +58,9 @@ namespace BlurMessageBox
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Width = 400;
+            this._graphics = this.CreateGraphics();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             var culture = CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentUICulture;
 
@@ -380,7 +389,7 @@ namespace BlurMessageBox
 
         #endregion
 
-        #region Static Methods
+        #region Methods
 
         [DebuggerStepThrough]
         private void MsgBox_MouseDown(object sender, MouseEventArgs e)
@@ -443,41 +452,32 @@ namespace BlurMessageBox
         [DebuggerStepThrough]
         private Size MessageSize(string message, string title)
         {
-            Graphics g = this.CreateGraphics();
-            int width = 350;
-            int height = 250;
+            var msgSize = GetTextSize(message, MessageFont);
+            var titleSize = GetTextSize(title, TitleFont);
 
-            SizeF msgSize = g.MeasureString(message, MessageFont);
-            SizeF titleSize = g.MeasureString(title, TitleFont);
-            msgSize.Width = Math.Max(msgSize.Width, titleSize.Width + PADDING);
+            var w = (int)(Math.Max(msgSize.Width, titleSize.Width) + BoxPadding.Left);
+            var h = (int)(Math.Max(msgSize.Height, titleSize.Height) + BoxPadding.Bottom);
 
-            if (message.Length < 150)
+            var boxSize = new Size()
             {
-                if (msgSize.Width > 350)
-                {
-                    width = (int)msgSize.Width;
-                }
-            }
-            else
-            {
-                //string[] groups = (from Match m in Regex.Matches(message, ".{1,180}") select m.Value).ToArray();
-                string[] groups = message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                Width = MinWidth > w ? MinWidth : w,
+                Height = MinHeight > h ? MinHeight : h
+            };
 
-                string maxString = " ";
-                foreach (var item in groups)
-                {
-                    if (item.Length > maxString.Length)
-                        maxString = item;
-                }
+            return boxSize;
+        }
 
-                //int maxLineLength = Math.Max(groups.Max(x => x.Length), (int)titleSize.Width);
-                int maxLineLength = PADDING +
-                        (int)Math.Max(g.MeasureString(maxString, MessageFont).Width, titleSize.Width);
+        private SizeF GetTextSize(string p, Font f)
+        {
+            // uncomment in vb.net:
 
-                width = (width > maxLineLength) ? width : maxLineLength;
-                height += (int)(msgSize.Height);
-            }
-            return new Size(width, height);
+            //var sb = new StringBuilder(p);
+            //sb.Replace( vbCr, Environment.NewLine); 
+            //sb.Replace(vbCrLf, Environment.NewLine); 
+            //p = sb.ToString();
+            //return _graphics.MeasureString(p, f);
+
+            return _graphics.MeasureString(p, f);
         }
 
         [DebuggerStepThrough]
@@ -612,9 +612,8 @@ namespace BlurMessageBox
             }
         }
 
-        #endregion
 
-        #region Methods
+
 
         [DebuggerStepperBoundary]
         [DebuggerStepThrough]
@@ -798,6 +797,30 @@ namespace BlurMessageBox
             Pen pen = new Pen(Color.FromArgb(0, 151, 251));
 
             g.DrawRectangle(pen, rect);
+
+            // Draw Resize rectangle:
+            Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
+            ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x84)
+            {  // Trap WM_NCHITTEST
+                Point pos = new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16);
+                pos = this.PointToClient(pos);
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)2;  // HTCAPTION
+                    return;
+                }
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)17; // HTBOTTOMRIGHT
+                    return;
+                }
+            }
+            base.WndProc(ref m);
         }
 
         #endregion

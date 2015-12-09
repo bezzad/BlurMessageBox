@@ -98,3 +98,20 @@ D:\Programming\MyProject\C# - Library\BlurMessageBox\src\TestWinForms\obj\Debug\
 D:\Programming\MyProject\C# - Library\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
 D:\Programming\MyProject\C# - Library\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
 D:\Programming\MyProject\C# - Library\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.exe.config
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.exe
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\TestWinForms.pdb
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\BlurMessageBox.pdb
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\ar\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\az\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\fa-IR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\fr-FR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\ru-RU\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\bin\Debug\tr-TR\BlurMessageBox.resources.dll
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csprojResolveAssemblyReference.cache
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Form1.resources
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.Properties.Resources.resources
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.csproj.GenerateResource.Cache
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.exe
+D:\Programming\MyProject\BlurMessageBox\src\TestWinForms\obj\Debug\TestWinForms.pdb
